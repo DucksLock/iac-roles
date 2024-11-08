@@ -1,15 +1,11 @@
-# roles/apache_php/tasks/main.yml
-- name: Install Apache
+# roles/mysql_server/tasks/main.yml
+- name: Install MySQL Server
   apt:
-    name: apache2
+    name: mysql-server
     state: present
 
-- name: Install PHP
-  apt:
-    name: php
-    state: present
-
-- name: Install PHP-MySQL
-  apt:
-    name: php-mysql
-    state: present
+- name: Ensure MySQL is running
+  service:
+    name: mysql
+    state: started
+    enabled: true

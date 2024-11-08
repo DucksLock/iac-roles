@@ -1,7 +1,7 @@
 galaxy_info:
-  role_name: apache_php
-  author: duckslock
-  description: "Installeert Apache en PHP op een webserver."
+  role_name: mysql_server
+  author: Duckslock
+  description: "Installeert MySQL op een database server."
   license: MIT
   min_ansible_version: "2.9"
   platforms:
