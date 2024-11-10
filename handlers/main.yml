@@ -1,0 +1,8 @@
+---
+# Handlers voor de nginx service
+
+- name: restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+  become: true

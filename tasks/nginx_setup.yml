@@ -1,0 +1,42 @@
+- name: Pull Nginx Docker image
+  docker_image:
+    name: nginx
+    source: pull
+
+- name: Run Nginx container 1
+  docker_container:
+    name: nginx1
+    image: nginx
+    state: started
+    ports:
+      - "8081:80"
+
+- name: Run Nginx container 2
+  docker_container:
+    name: nginx2
+    image: nginx
+    state: started
+    ports:
+      - "8082:80"
+
+- name: Copy Nginx custom index page
+  copy:
+    src: files/index.html
+    dest: "/usr/share/nginx/html/index.html"
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Create Nginx reverse proxy configuration
+  template:
+    src: templates/nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+    mode: 0644
+  notify:
+    - Reload nginx
+
+- name: Ensure Nginx service is running
+  service:
+    name: nginx
+    state: started
+    enabled: yes
